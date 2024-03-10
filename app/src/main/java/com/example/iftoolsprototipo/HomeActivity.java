@@ -34,5 +34,10 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        binding.alteraConta.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, AlteraContaActivity.class);
+            startActivity(intent);
+        });
+
     }
 }
