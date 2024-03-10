@@ -35,14 +35,14 @@
         android:hint="Senha"
         android:inputType="numberPassword"
         android:padding="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintBottom_toTopOf="@+id/recuperarBtn"
         app:layout_constraintEnd_toEndOf="@id/email"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/email"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginButton"
+        android:id="@+id/recuperarBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -65,8 +65,8 @@
         android:layout_marginTop="10dp"
         android:text="Criar Conta"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@id/loginButton"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+        app:layout_constraintStart_toStartOf="@id/recuperarBtn"
+        app:layout_constraintTop_toBottomOf="@id/recuperarBtn" />
 
     <TextView
         android:id="@+id/recuperaConta"
@@ -75,8 +75,8 @@
         android:layout_marginTop="10dp"
         android:text="Recuperar Conta"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/loginButton"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+        app:layout_constraintEnd_toEndOf="@id/recuperarBtn"
+        app:layout_constraintTop_toBottomOf="@id/recuperarBtn" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -86,8 +86,8 @@
         android:indeterminateTint="@color/buttons"
         android:visibility="invisible"
         tools:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@id/loginButton"
-        app:layout_constraintStart_toStartOf="@id/loginButton"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+        app:layout_constraintEnd_toEndOf="@id/recuperarBtn"
+        app:layout_constraintStart_toStartOf="@id/recuperarBtn"
+        app:layout_constraintTop_toBottomOf="@id/recuperarBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
