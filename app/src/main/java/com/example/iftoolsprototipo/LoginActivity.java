@@ -35,48 +35,44 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        binding.loginButton.setOnClickListener(view -> validaCampos());
+        binding.loginButton.setOnClickListener(view -> {
+            if (validaCampos()) {
+                Toast.makeText(this, "Logando", Toast.LENGTH_SHORT).show();
+                signIn();
+            } ;
+        });
 
     }
 
-    public void validaCampos() {
-
+    public boolean validaCampos() {
         String email = binding.email.getText().toString();
         String password = binding.senha.getText().toString();
 
-        // TODO: 09/03/2024 Validar se é menor que 6 caracteres a senha 
-
-        if (!email.isEmpty() && !password.isEmpty()) {
-            signIn(email, password);
-            return;
-        }
+        if (!email.isEmpty() && password.length() >= 6) return true;
 
         if (email.isEmpty()) {
             binding.email.setError("Vazio");
         }
-        if (password.isEmpty()) {
-            binding.senha.setError("Vazio");
+        if (password.length() < 6) {
+            binding.senha.setError("Menor do que 6 caracteres");
         }
-        return;
+        return false;
     }
 
-    public void signIn(String email, String password) {
-
-        binding.progress.setVisibility(View.VISIBLE);
+    public void signIn() {
+        String email = binding.email.getText().toString();
+        String password = binding.senha.getText().toString();
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    binding.progress.setVisibility(View.INVISIBLE);
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else {
-                    binding.progress.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Falha ao tentar autenticar.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 }

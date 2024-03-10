@@ -28,5 +28,8 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(intent);
         });
+
+        // TODO: 10/03/2024 Alterar dados 
+        
     }
 }

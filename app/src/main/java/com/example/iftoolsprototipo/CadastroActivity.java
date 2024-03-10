@@ -43,9 +43,9 @@ public class CadastroActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         binding.cadastroBotao.setOnClickListener(view -> {
-            Toast.makeText(this, "Cadastrando...", Toast.LENGTH_SHORT).show();
 
             if (validarDados()) {
+                Toast.makeText(this, "Cadastrando...", Toast.LENGTH_SHORT).show();
                 cadastrar();
             }
 
@@ -59,8 +59,20 @@ public class CadastroActivity extends AppCompatActivity {
         email = binding.email.getText().toString();
         senha = binding.senha.getText().toString();
 
-        if (!nome.isEmpty() && !telefone.isEmpty() && !email.isEmpty() && !senha.isEmpty()) {
+        if (!nome.isEmpty() && !telefone.isEmpty() && !email.isEmpty() && senha.length() >= 6)
             return true;
+
+        if (nome.isEmpty()) {
+            binding.nome.setError("Nome Vazio");
+        }
+        if (telefone.isEmpty()) {
+            binding.telefone.setError("Telefone Vazio");
+        }
+        if (email.isEmpty()) {
+            binding.email.setError("Email Vazio");
+        }
+        if (senha.length() < 6) {
+            binding.senha.setError("Senha menor que 6 caracteres");
         }
         return false;
     }
