@@ -29,7 +29,10 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // TODO: 10/03/2024 Alterar dados 
-        
+        binding.alterarDados.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, AlterarDadosActivity.class);
+            startActivity(intent);
+        });
+
     }
 }

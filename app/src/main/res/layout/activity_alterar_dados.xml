@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark"
+    android:padding="20dp"
+    tools:context=".AlterarDadosActivity">
+
+    <EditText
+        android:id="@+id/nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text"
+        android:elevation="10dp"
+        android:hint="Nome"
+        android:inputType="text"
+        android:padding="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/telefone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <EditText
+        android:id="@+id/telefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text"
+        android:elevation="10dp"
+        android:hint="Telefone"
+        android:inputType="number"
+        android:padding="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/salvarBtn"
+        app:layout_constraintTop_toBottomOf="@+id/nome"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/salvarBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/buttons"
+        android:elevation="10dp"
+        android:padding="15dp"
+        android:text="Salvar"
+        android:textColor="@color/dark"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/telefone"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:indeterminateTint="@color/buttons"
+        android:visibility="invisible"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="@id/salvarBtn"
+        app:layout_constraintStart_toStartOf="@id/salvarBtn"
+        app:layout_constraintTop_toBottomOf="@id/salvarBtn"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else {
+                    binding.progress.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Falha ao tentar autenticar.", Toast.LENGTH_SHORT).show();
                 }
             }

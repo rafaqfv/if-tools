@@ -61,7 +61,7 @@
         android:elevation="10dp"
         android:padding="15dp"
         android:text="Login"
-        android:textColor="@color/white"
+        android:textColor="@color/dark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/senha"
