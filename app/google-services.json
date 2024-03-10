@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "683307708584",
+    "project_id": "if-tools-7a0a7",
+    "storage_bucket": "if-tools-7a0a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683307708584:android:9e4f13364b388e1736129d",
+        "android_client_info": {
+          "package_name": "com.example.iftoolsprototipo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpuq2r1jFQaNrzVs5VtDHkSuvW9FKkRmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

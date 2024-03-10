@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.IFToolsPrototipo" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/dark</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="Q">false</item>
+    </style>
+
+    <style name="Theme.IFToolsPrototipo" parent="Base.Theme.IFToolsPrototipo" />
+</resources>
