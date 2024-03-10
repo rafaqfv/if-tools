@@ -9,6 +9,17 @@
     android:padding="20dp"
     tools:context=".LoginActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
@@ -35,14 +46,14 @@
         android:hint="Senha"
         android:inputType="numberPassword"
         android:padding="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/recuperarBtn"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
         app:layout_constraintEnd_toEndOf="@id/email"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/email"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/recuperarBtn"
+        android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -65,8 +76,8 @@
         android:layout_marginTop="10dp"
         android:text="Criar Conta"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@id/recuperarBtn"
-        app:layout_constraintTop_toBottomOf="@id/recuperarBtn" />
+        app:layout_constraintStart_toStartOf="@id/loginBtn"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn" />
 
     <TextView
         android:id="@+id/recuperaConta"
@@ -75,8 +86,8 @@
         android:layout_marginTop="10dp"
         android:text="Recuperar Conta"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/recuperarBtn"
-        app:layout_constraintTop_toBottomOf="@id/recuperarBtn" />
+        app:layout_constraintEnd_toEndOf="@id/loginBtn"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -85,9 +96,9 @@
         android:layout_marginTop="30dp"
         android:indeterminateTint="@color/buttons"
         android:visibility="invisible"
-        tools:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@id/recuperarBtn"
-        app:layout_constraintStart_toStartOf="@id/recuperarBtn"
-        app:layout_constraintTop_toBottomOf="@id/recuperarBtn" />
+        app:layout_constraintEnd_toEndOf="@id/loginBtn"
+        app:layout_constraintStart_toStartOf="@id/loginBtn"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

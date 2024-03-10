@@ -42,10 +42,13 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance();
 
+        binding.backCadastro.setOnClickListener(view -> finish());
+
         binding.cadastroBotao.setOnClickListener(view -> {
 
             if (validarDados()) {
                 Toast.makeText(this, "Cadastrando...", Toast.LENGTH_SHORT).show();
+                binding.progress.setVisibility(View.VISIBLE);
                 cadastrar();
             }
 
@@ -77,19 +80,15 @@ public class CadastroActivity extends AppCompatActivity {
         return false;
     }
 
-    public void salvarDados(String nome, String telefone, String email, String senha, String id) {
-        Map<String, Object> user = new HashMap<>();
-        user.put("Nome", nome);
-        user.put("Telefone", telefone);
-        user.put("Email", email);
-        user.put("Senha", senha);
-        user.put("Id", id);
+    public void salvarDados(Usuario user) {
 
         try {
             db.collection("users").add(user).addOnSuccessListener(documentReference -> {
-                Toast.makeText(CadastroActivity.this, "Documento foi escrito com sucesso com o id: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                // À fazer mensagem de sucesso
+                Log.d(TAG, "Documento adicionado com id: " + documentReference.getId());
             }).addOnFailureListener(e -> {
-                Toast.makeText(CadastroActivity.this, "Erro ao adicionar documento" + e, Toast.LENGTH_SHORT).show();
+                // À fazer mensagem de sucesso
+                Log.w(TAG, "Falha ao adicionar documento", e);
             });
         } catch (Exception e) {
             Toast.makeText(this, "Excessão" + e, Toast.LENGTH_SHORT).show();
@@ -105,12 +104,18 @@ public class CadastroActivity extends AppCompatActivity {
 
         mAuth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
-                FirebaseUser user = mAuth.getCurrentUser();
-                String idUser = user.getUid().toString();
-                Toast.makeText(this, "Usuário criado com id: " + idUser, Toast.LENGTH_SHORT).show();
-                salvarDados(nome, telefone, email, senha, idUser);
+                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                String idUser = firebaseUser.getUid().toString();
+                Log.d(TAG, "signInWithEmail:success");
+                Usuario user = new Usuario(nome, telefone, email, senha);
+                user.setId(idUser);
+                user.setNivel(1);
+                salvarDados(user);
+                Intent intent = new Intent(CadastroActivity.this, HomeActivity.class);
+                startActivity(intent);
             } else {
                 Toast.makeText(CadastroActivity.this, "Autenticação falhou.", Toast.LENGTH_SHORT).show();
+                Log.w(TAG, "signInWithEmail:failure", task.getException());
             }
         });
     }

@@ -9,15 +9,23 @@
     android:padding="20dp"
     tools:context=".CadastroActivity">
 
+    <ImageView
+        android:id="@+id/backCadastro"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cadastro"
         android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/nome"
@@ -38,12 +46,12 @@
         android:id="@+id/telefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edit_text"
         android:elevation="10dp"
         android:hint="Telefone"
         android:inputType="number"
         android:padding="15dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="@+id/nome"
         app:layout_constraintHorizontal_bias="0.5"
@@ -54,11 +62,11 @@
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edit_text"
         android:elevation="10dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:layout_marginTop="10dp"
         android:padding="15dp"
         app:layout_constraintBottom_toTopOf="@+id/senha"
         app:layout_constraintEnd_toEndOf="@+id/telefone"
@@ -70,9 +78,9 @@
         android:id="@+id/senha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edit_text"
         android:elevation="10dp"
-        android:layout_marginTop="10dp"
         android:hint="Senha"
         android:inputType="numberPassword"
         android:padding="15dp"
@@ -86,10 +94,10 @@
         android:id="@+id/cadastroBotao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/buttons"
         android:elevation="10dp"
         android:text="Cadastrar"
-        android:layout_marginTop="10dp"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -106,10 +114,10 @@
         android:layout_marginTop="20dp"
         android:indeterminateTint="@color/buttons"
         android:visibility="invisible"
-        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/cadastroBotao"
         app:layout_constraintStart_toStartOf="@id/cadastroBotao"
-        app:layout_constraintTop_toBottomOf="@+id/cadastroBotao" />
+        app:layout_constraintTop_toBottomOf="@+id/cadastroBotao"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

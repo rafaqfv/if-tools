@@ -35,8 +35,13 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        binding.loginButton.setOnClickListener(view -> {
+        binding.recuperaConta.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this, RecuperaContaActivity.class));
+        });
+
+        binding.loginBtn.setOnClickListener(view -> {
             if (validaCampos()) {
+                binding.progress.setVisibility(View.VISIBLE );
                 Toast.makeText(this, "Logando", Toast.LENGTH_SHORT).show();
                 signIn();
             } ;

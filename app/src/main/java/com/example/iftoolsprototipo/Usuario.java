@@ -1,18 +1,25 @@
 package com.example.iftoolsprototipo;
 
 public class Usuario {
-    private int id;
+    private String id;
     private String nome;
     private String telefone;
     private String email;
     private int nivel;
     private String senha;
 
-    public int getId() {
+    public Usuario(String nome, String telefone, String email, String senha) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
