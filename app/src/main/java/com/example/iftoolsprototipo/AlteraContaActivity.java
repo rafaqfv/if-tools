@@ -2,6 +2,7 @@ package com.example.iftoolsprototipo;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,6 +19,8 @@ import com.example.iftoolsprototipo.databinding.ActivityAlterarDadosBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +34,7 @@ public class AlteraContaActivity extends AppCompatActivity {
     private ActivityAlteraContaBinding binding;
     private FirebaseUser mAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String senhaFinal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,9 @@ public class AlteraContaActivity extends AppCompatActivity {
         binding = ActivityAlteraContaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
+
+        Intent intent = getIntent();
+        senhaFinal = intent.getStringExtra("senha");
 
         binding.backConta.setOnClickListener(view -> finish());
 
@@ -55,7 +62,7 @@ public class AlteraContaActivity extends AppCompatActivity {
         String email = binding.email.getText().toString();
         String senha = binding.senha.getText().toString();
 
-        if (!email.isEmpty() && senha.length() > 6) {
+        if (!email.isEmpty() && senha.length() >= 6) {
             return true;
         }
 
@@ -91,17 +98,19 @@ public class AlteraContaActivity extends AppCompatActivity {
     public void atualizaConta() {
         String email = binding.email.getText().toString();
         String senha = binding.senha.getText().toString();
+        AuthCredential credential = EmailAuthProvider
+                .getCredential(mAuth.getEmail().toString(), senhaFinal);
 
-
-        // TODO: 10/03/2024 O email não é alterado, parece que é necessário verificação de email.
-        mAuth.updateEmail(email)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(this, "Atualizou email", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Não conseguiu alterar email", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        mAuth.reauthenticate(credential).addOnCompleteListener(task -> {
+            mAuth.updateEmail(email)
+                    .addOnCompleteListener(taskEmail -> {
+                        if (taskEmail.isSuccessful()) {
+                            Toast.makeText(this, "Atualizou email", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Não conseguiu alterar email", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
 
         mAuth.updatePassword(senha).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

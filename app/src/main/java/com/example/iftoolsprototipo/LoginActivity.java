@@ -15,7 +15,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.iftoolsprototipo.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -67,12 +69,16 @@ public class LoginActivity extends AppCompatActivity {
     public void signIn() {
         String email = binding.email.getText().toString();
         String password = binding.senha.getText().toString();
+        AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    firebaseUser.reauthenticate(credential).addOnCompleteListener(task1 -> Toast.makeText(LoginActivity.this, "Autenticado", Toast.LENGTH_SHORT).show());
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("senha", password);
                     startActivity(intent);
                 } else {
                     binding.progress.setVisibility(View.INVISIBLE);
