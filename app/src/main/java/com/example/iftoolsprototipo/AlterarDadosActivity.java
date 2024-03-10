@@ -40,10 +40,14 @@ public class AlterarDadosActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
 
+        binding.backDados.setOnClickListener(view -> finish());
+
         binding.salvarBtn.setOnClickListener(view -> {
             if (valida()) {
+                binding.progress.setVisibility(View.VISIBLE);
                 atualiza();
                 binding.progress.setVisibility(View.INVISIBLE);
+
             }
         });
 
@@ -64,7 +68,6 @@ public class AlterarDadosActivity extends AppCompatActivity {
     }
 
     public void atualiza() {
-        binding.progress.setVisibility(View.VISIBLE);
         Toast.makeText(this, "Atualizando...", Toast.LENGTH_SHORT).show();
         String nome = binding.nome.getText().toString();
         String telefone = binding.telefone.getText().toString();
@@ -80,6 +83,8 @@ public class AlterarDadosActivity extends AppCompatActivity {
 
                 documentSnapshot.getReference().update(updateUser).addOnSuccessListener(unused -> {
                     Toast.makeText(this, "Documento atualizado com sucesso", Toast.LENGTH_SHORT).show();
+                    binding.nome.setText("");
+                    binding.telefone.setText("");
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {

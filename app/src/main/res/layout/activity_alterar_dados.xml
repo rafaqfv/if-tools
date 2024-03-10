@@ -9,6 +9,25 @@
     android:padding="20dp"
     tools:context=".AlterarDadosActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alterar Dados"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/backDados"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <EditText
         android:id="@+id/nome"
         android:layout_width="match_parent"
@@ -57,9 +76,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:elevation="10dp"
         android:indeterminateTint="@color/buttons"
         android:visibility="invisible"
-        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="@id/salvarBtn"
         app:layout_constraintStart_toStartOf="@id/salvarBtn"
         app:layout_constraintTop_toBottomOf="@id/salvarBtn"
