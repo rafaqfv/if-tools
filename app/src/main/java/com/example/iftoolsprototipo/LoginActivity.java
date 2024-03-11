@@ -58,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
                 binding.progress.setVisibility(View.VISIBLE);
                 Toast.makeText(this, "Logando", Toast.LENGTH_SHORT).show();
                 signIn();
-                binding.progress.setVisibility(View.INVISIBLE);
             }
             ;
         });
@@ -90,9 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    firebaseUser.reauthenticate(credential).addOnCompleteListener(task1 -> Toast.makeText(LoginActivity.this, "Autenticado", Toast.LENGTH_SHORT).show());
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    intent.putExtra("senha", password);
                     startActivity(intent);
                 } else {
                     binding.progress.setVisibility(View.INVISIBLE);

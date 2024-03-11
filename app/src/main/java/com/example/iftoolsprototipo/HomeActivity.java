@@ -23,9 +23,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance();
 
-        Intent intentExtra = getIntent();
-        String senha = intentExtra.getStringExtra("senha");
-
         binding.logado.setOnClickListener(view -> {
             mAuth.signOut();
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
@@ -36,12 +33,5 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeActivity.this, AlterarDadosActivity.class);
             startActivity(intent);
         });
-
-        binding.alteraConta.setOnClickListener(view -> {
-            Intent intent = new Intent(HomeActivity.this, AlteraContaActivity.class);
-            intent.putExtra("senha", senha);
-            startActivity(intent);
-        });
-
     }
 }

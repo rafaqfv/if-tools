@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -34,7 +35,6 @@ public class AlteraContaActivity extends AppCompatActivity {
     private ActivityAlteraContaBinding binding;
     private FirebaseUser mAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String senhaFinal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,7 @@ public class AlteraContaActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
 
-        Intent intent = getIntent();
-        senhaFinal = intent.getStringExtra("senha");
+        binding.email.setVisibility(View.INVISIBLE);
 
         binding.backConta.setOnClickListener(view -> finish());
 
@@ -59,14 +58,12 @@ public class AlteraContaActivity extends AppCompatActivity {
     }
 
     public boolean valida() {
-        String email = binding.email.getText().toString();
         String senha = binding.senha.getText().toString();
 
-        if (!email.isEmpty() && senha.length() >= 6) {
+        if (senha.length() >= 6) {
             return true;
         }
 
-        if (email.isEmpty()) binding.email.setError("Vazio");
         if (senha.length() < 6) binding.senha.setError("Vazio");
 
         return false;
@@ -74,7 +71,6 @@ public class AlteraContaActivity extends AppCompatActivity {
 
     public void atualizaDB() {
         Toast.makeText(this, "Atualizando...", Toast.LENGTH_SHORT).show();
-        String email = binding.email.getText().toString();
         String senha = binding.senha.getText().toString();
         String uId = mAuth.getUid();
         Query query = db.collection("users").whereEqualTo("id", uId);
@@ -83,12 +79,10 @@ public class AlteraContaActivity extends AppCompatActivity {
             if (!queryDocumentSnapshots.isEmpty()) {
                 DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
                 Map<String, Object> updateUser = new HashMap<>();
-                updateUser.put("email", email);
                 updateUser.put("senha", senha);
 
                 documentSnapshot.getReference().update(updateUser).addOnSuccessListener(unused -> {
                     Toast.makeText(this, "Documento atualizado com sucesso", Toast.LENGTH_SHORT).show();
-                    binding.email.setText("");
                     binding.senha.setText("");
                 }).addOnFailureListener(e -> Toast.makeText(AlteraContaActivity.this, "Não foi possível atualizar", Toast.LENGTH_SHORT).show());
             }
@@ -96,21 +90,7 @@ public class AlteraContaActivity extends AppCompatActivity {
     }
 
     public void atualizaConta() {
-        String email = binding.email.getText().toString();
         String senha = binding.senha.getText().toString();
-        AuthCredential credential = EmailAuthProvider
-                .getCredential(mAuth.getEmail().toString(), senhaFinal);
-
-        mAuth.reauthenticate(credential).addOnCompleteListener(task -> {
-            mAuth.updateEmail(email)
-                    .addOnCompleteListener(taskEmail -> {
-                        if (taskEmail.isSuccessful()) {
-                            Toast.makeText(this, "Atualizou email", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(this, "Não conseguiu alterar email", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        });
 
         mAuth.updatePassword(senha).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
