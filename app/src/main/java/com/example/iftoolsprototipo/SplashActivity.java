@@ -1,6 +1,7 @@
 package com.example.iftoolsprototipo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,6 +22,13 @@ public class SplashActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
+
+            SharedPreferences preferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("viu_splash", true);
+            editor.apply();
+
+            finish();
         }, 1500);
 
     }

@@ -1,6 +1,7 @@
 package com.example.iftoolsprototipo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -30,6 +31,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        SharedPreferences preferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        boolean viuSplash = preferences.getBoolean("viu_splash", false);
+
+        if (!viuSplash) {
+            Intent intent = new Intent(this, SplashActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         mAuth = FirebaseAuth.getInstance();
 
         binding.criarConta.setOnClickListener(view -> {
@@ -43,10 +55,12 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.loginBtn.setOnClickListener(view -> {
             if (validaCampos()) {
-                binding.progress.setVisibility(View.VISIBLE );
+                binding.progress.setVisibility(View.VISIBLE);
                 Toast.makeText(this, "Logando", Toast.LENGTH_SHORT).show();
                 signIn();
-            } ;
+                binding.progress.setVisibility(View.INVISIBLE);
+            }
+            ;
         });
 
     }
