@@ -59,13 +59,10 @@ public class AlteraContaActivity extends AppCompatActivity {
 
     public boolean valida() {
         String senha = binding.senha.getText().toString();
-
         if (senha.length() >= 6) {
             return true;
         }
-
-        if (senha.length() < 6) binding.senha.setError("Vazio");
-
+        if (senha.length() < 6) binding.senha.setError("Menor do que 6 caracteres");
         return false;
     }
 

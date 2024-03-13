@@ -43,15 +43,12 @@ public class CadastroActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         binding.backCadastro.setOnClickListener(view -> finish());
-
         binding.cadastroBotao.setOnClickListener(view -> {
-
             if (validarDados()) {
                 Toast.makeText(this, "Cadastrando...", Toast.LENGTH_SHORT).show();
                 binding.progress.setVisibility(View.VISIBLE);
                 cadastrar();
             }
-
         });
     }
 
@@ -81,13 +78,11 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void salvarDados(Usuario user) {
-
         try {
-            db.collection("users").add(user).addOnSuccessListener(documentReference -> {
-                // À fazer mensagem de sucesso
+            db.collection("users").add(user)
+                    .addOnSuccessListener(documentReference -> {
                 Log.d(TAG, "Documento adicionado com id: " + documentReference.getId());
             }).addOnFailureListener(e -> {
-                // À fazer mensagem de sucesso
                 Log.w(TAG, "Falha ao adicionar documento", e);
             });
         } catch (Exception e) {
