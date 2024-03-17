@@ -2,6 +2,8 @@ package com.example.iftoolsprototipo;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -59,9 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Logando", Toast.LENGTH_SHORT).show();
                 signIn();
             }
-            ;
         });
-
     }
 
     public boolean validaCampos() {
@@ -85,16 +85,13 @@ public class LoginActivity extends AppCompatActivity {
         AuthCredential credential = EmailAuthProvider.getCredential(email, password);
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    binding.progress.setVisibility(View.INVISIBLE);
-                    Toast.makeText(LoginActivity.this, "Falha ao tentar autenticar.", Toast.LENGTH_SHORT).show();
-                }
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+            } else {
+                binding.progress.setVisibility(View.INVISIBLE);
+                Toast.makeText(LoginActivity.this, "Falha ao tentar autenticar.", Toast.LENGTH_SHORT).show();
             }
         });
     }

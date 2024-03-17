@@ -3,7 +3,10 @@ package com.example.iftoolsprototipo;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -81,10 +84,13 @@ public class CadastroActivity extends AppCompatActivity {
         try {
             db.collection("users").add(user)
                     .addOnSuccessListener(documentReference -> {
-                Log.d(TAG, "Documento adicionado com id: " + documentReference.getId());
-            }).addOnFailureListener(e -> {
-                Log.w(TAG, "Falha ao adicionar documento", e);
-            });
+                        Log.d(TAG, "Documento adicionado com id: " + documentReference.getId());
+                        Intent intent = new Intent(CadastroActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }).addOnFailureListener(e -> {
+                        Log.w(TAG, "Falha ao adicionar documento", e);
+                    });
         } catch (Exception e) {
             Toast.makeText(this, "Excessão" + e, Toast.LENGTH_SHORT).show();
         }
@@ -102,12 +108,8 @@ public class CadastroActivity extends AppCompatActivity {
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                 String idUser = firebaseUser.getUid().toString();
                 Log.d(TAG, "signInWithEmail:success");
-                Usuario user = new Usuario(nome, telefone, email, senha);
-                user.setId(idUser);
-                user.setNivel(1);
+                Usuario user = new Usuario(nome, telefone, email, senha, idUser);
                 salvarDados(user);
-                Intent intent = new Intent(CadastroActivity.this, HomeActivity.class);
-                startActivity(intent);
             } else {
                 Toast.makeText(CadastroActivity.this, "Autenticação falhou.", Toast.LENGTH_SHORT).show();
                 Log.w(TAG, "signInWithEmail:failure", task.getException());

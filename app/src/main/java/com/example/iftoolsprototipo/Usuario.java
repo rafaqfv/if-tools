@@ -6,21 +6,21 @@ public class Usuario {
     private String telefone;
     private String email;
     private int nivel;
+    private int tipo;
     private String senha;
 
-    public Usuario(String nome, String telefone, String email, String senha) {
+    public Usuario(String nome, String telefone, String email, String senha, String id) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.senha = senha;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
         this.id = id;
+        this.nivel = 3;
+        this.tipo = 3;
+    }
+
+    public Usuario() {
+
     }
 
     public String getNome() {
@@ -55,6 +55,14 @@ public class Usuario {
         this.nivel = nivel;
     }
 
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -62,4 +70,13 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }
